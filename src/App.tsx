@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React  from 'react';
 import './App.css';
+import DialogContainer from './components/DialogContainer';
+import { dialog } from './services/dialog.service';
+import Test from './components/test';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const openDialog = () => {
+        dialog.open(<Test/>, {data: 'Test Data'}).afterClosed.subscribe(res => console.log(res))
+    }
+
+    return (
+        <>
+            <DialogContainer/>
+            <div className="App">
+                <button onClick={openDialog}>Open</button>
+            </div>
+        </>
+
+    );
 }
 
 export default App;
